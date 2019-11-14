@@ -1,0 +1,16 @@
+{
+  "name": "Egov-Easyjump",
+  "version": "0.0.1",
+  "description": "Keyboard shortcuts on e-Gov",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://elaws.e-gov.go.jp/*"
+      ],
+      "js": [
+        "bundle.js"
+      ]
+    }
+  ]
+}
