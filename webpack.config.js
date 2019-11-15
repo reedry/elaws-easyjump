@@ -21,8 +21,10 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: "./src/manifest.json",
-        to: "./"
+        from: "./*",
+        to: "./",
+        context: "src/",
+        ignore: ["*.ts"]
       }
     ]),
   ]

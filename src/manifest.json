@@ -1,7 +1,7 @@
 {
-  "name": "Egov-Easyjump",
+  "name": "eLaws-Easyjump",
   "version": "0.0.1",
-  "description": "Keyboard shortcuts on e-Gov",
+  "description": "Keyboard shortcuts on e-Gov Law Database",
   "manifest_version": 2,
   "content_scripts": [
     {
@@ -10,6 +10,9 @@
       ],
       "js": [
         "bundle.js"
+      ],
+      "css": [
+        "style.css"
       ]
     }
   ]

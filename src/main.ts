@@ -14,6 +14,10 @@ window.onload = function () {
       margin += offset.top;
     }
   }
+  let cmd_popup = document.createElement("div");
+  document.body.appendChild(cmd_popup);
+  cmd_popup.id = "easyjump_cmd_popup";
+  cmd_popup.style.display = "none";
 };
 
 document.onkeydown = function (event) {
@@ -22,14 +26,16 @@ document.onkeydown = function (event) {
     cmd += c;
     if (scrollToArticle(Number(cmd))) {
       clearTimeout(timer);
-      timer = setTimeout(function() {
-        cmd = "";
-      }, 2000);
+      timer = setTimeout(resetCmd, 2000);
+      setPopupText(cmd);
     } else { // if not match
-      cmd = "";
+      clearTimeout(timer);
+      resetCmd();
     }
   } else { // non-number keys
     cmd = "";
+    clearTimeout(timer);
+    resetCmd();
   }
 };
 
@@ -37,7 +43,7 @@ function scrollToArticle(n: number): boolean {
   let offset = $(makeSelector(n)).first().offset();
   if (offset) {
     let dist = offset.top - margin;
-    alert([dist, offset.top, margin]);
+    debug([dist, offset.top, margin]);
     Scroller.scrollTo(0, dist);
     return true;
   } else {
@@ -67,4 +73,27 @@ function makeDigit(n: number, c: string): string {
   if (n == 0) return "";
   if (n == 1) return c;
   return KANJIS[n] + c;
+}
+
+function resetCmd(): void {
+  cmd = "";
+  hidePopup();
+}
+
+function hidePopup(): void {
+  let popup = document.getElementById("easyjump_cmd_popup");
+  if (popup) popup.style.display = "none";
+}
+
+function setPopupText(s: string): void {
+  let popup = document.getElementById("easyjump_cmd_popup");
+  if (popup) {
+    popup.style.display = "inline";
+    popup.innerText = s;
+  }
+}
+
+function debug(s: any): void {
+  console.log(s);
+  // TODO: debug popup
 }
