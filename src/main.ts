@@ -1,4 +1,4 @@
-import * as $ from "jquery";
+import * as Sizzle from "sizzle";
 
 var cmd = "";
 var timer: number;
@@ -7,12 +7,9 @@ var margin = 25;
 
 window.onload = function () {
   if (location.href.indexOf("viewContents") == -1) {
-    const elm = document.getElementById("right_content") ?? window;
+    const elm = document.getElementById("right_content") ?? document.body;
     Scroller = elm;
-    let offset = $(elm).offset();
-    if (offset) {
-      margin += offset.top;
-    }
+    margin += getAbsolutePositionTop(elm);
   }
   let cmd_popup = document.createElement("div");
   document.body.appendChild(cmd_popup);
@@ -40,10 +37,11 @@ document.onkeydown = function (event) {
 };
 
 function scrollToArticle(n: number): boolean {
-  let offset = $(makeSelector(n)).first().offset();
-  if (offset) {
-    let dist = offset.top - margin;
-    debug([dist, offset.top, margin]);
+  let elms = Sizzle(makeSelector(n));
+  if (elms.length > 0) {
+    let pos = getAbsolutePositionTop(elms[0]);
+    let dist = pos - margin;
+    debug([dist, pos, margin]);
     Scroller.scrollTo(0, dist);
     return true;
   } else {
@@ -73,6 +71,10 @@ function makeDigit(n: number, c: string): string {
   if (n == 0) return "";
   if (n == 1) return c;
   return KANJIS[n] + c;
+}
+
+function getAbsolutePositionTop(elm: Element): number {
+  return elm.getBoundingClientRect().top + window.pageYOffset;
 }
 
 function resetCmd(): void {

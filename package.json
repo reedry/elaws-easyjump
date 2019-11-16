@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@types/jquery": "^3.3.31",
+    "@types/sizzle": "^2.3.2",
     "copy-webpack-plugin": "^5.0.5",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.2",
@@ -8,6 +8,6 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "jquery": "^3.4.1"
+    "sizzle": "^2.3.4"
   }
 }
