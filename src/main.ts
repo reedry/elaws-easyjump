@@ -17,9 +17,11 @@ window.onload = function () {
 
 document.onkeydown = function (event) {
   const c = event.key;
-  if ("0123456789".indexOf(c) != -1) {
+  if ("0123456789-n".indexOf(c) != -1) {
     cmd += c;
-    if (scrollToArticle(Number(cmd))) {
+    const art_num = cmdToArtNumber(cmd);
+    debug(art_num);
+    if (scrollToArticle(art_num)) {
       clearTimeout(timer);
       timer = setTimeout(resetCmd, 2000);
       setPopupText(cmd);
@@ -34,8 +36,8 @@ document.onkeydown = function (event) {
   }
 };
 
-function scrollToArticle(n: number): boolean {
-  let elms = getArticlesByNumber(n);
+function scrollToArticle(art_num: string): boolean {
+  let elms = getArticlesByNumber(art_num);
   if (elms.length > 0) {
     let pos = getAbsolutePositionTop(elms[0]);
     let dist = pos - margin;
@@ -47,10 +49,16 @@ function scrollToArticle(n: number): boolean {
   }
 }
 
-function getArticlesByNumber(n: number): Element[] {
+function getArticlesByNumber(art_num: string): Element[] {
   return Array.prototype.slice.call(
     document.getElementsByClassName("ArticleTitle")
-  ).filter(elm => elm.textContent.indexOf(toKanjiNumeral(n)) > -1);
+  ).filter(elm => elm.textContent.indexOf(art_num) > -1);
+}
+
+function cmdToArtNumber(cmd: string): string {
+  let nums = cmd.split(/[-n]/).map(s => toKanjiNumeral(Number(s)));
+  nums[0] += '条';
+  return nums.join('の');
 }
 
 const KANJIS = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
