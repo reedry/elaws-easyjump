@@ -1,5 +1,3 @@
-import * as Sizzle from "sizzle";
-
 var cmd = "";
 var timer: number;
 var Scroller: Window | HTMLElement = window;
@@ -37,7 +35,7 @@ document.onkeydown = function (event) {
 };
 
 function scrollToArticle(n: number): boolean {
-  let elms = Sizzle(makeSelector(n));
+  let elms = getArticlesByNumber(n);
   if (elms.length > 0) {
     let pos = getAbsolutePositionTop(elms[0]);
     let dist = pos - margin;
@@ -49,8 +47,10 @@ function scrollToArticle(n: number): boolean {
   }
 }
 
-function makeSelector(n: number): string {
-  return ".ArticleTitle:contains('" + toKanjiNumeral(n) + "')";
+function getArticlesByNumber(n: number): Element[] {
+  return Array.prototype.slice.call(
+    document.getElementsByClassName("ArticleTitle")
+  ).filter(elm => elm.textContent.indexOf(toKanjiNumeral(n)) > -1);
 }
 
 const KANJIS = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
