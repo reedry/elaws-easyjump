@@ -6,7 +6,7 @@
   "content_scripts": [
     {
       "matches": ["https://elaws.e-gov.go.jp/*"],
-      "js": ["main.js"],
+      "js": ["easyjump.js"],
       "css": ["style.css"]
     }
   ]
