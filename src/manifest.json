@@ -5,15 +5,9 @@
   "manifest_version": 2,
   "content_scripts": [
     {
-      "matches": [
-        "https://elaws.e-gov.go.jp/*"
-      ],
-      "js": [
-        "bundle.js"
-      ],
-      "css": [
-        "style.css"
-      ]
+      "matches": ["https://elaws.e-gov.go.jp/*"],
+      "js": ["main.js"],
+      "css": ["style.css"]
     }
   ]
 }

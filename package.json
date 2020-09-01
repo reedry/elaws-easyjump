@@ -1,10 +1,12 @@
 {
+  "name": "elaws-easyjump",
+  "version": "0.0.1",
+  "description": "Chrome extension providing shortcuts to jump to the articles on e-Gov Law Database",
+  "repository": "https://github.com/ryoshid/elaws-easyjump",
+  "author": "ryoshid <r.yoshida.c@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
-    "copy-webpack-plugin": "^5.0.5",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
-  },
-  "dependencies": {}
+    "prettier": "^2.1.1",
+    "typescript": "^4.0.2"
+  }
 }
